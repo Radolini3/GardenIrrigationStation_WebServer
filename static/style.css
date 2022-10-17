@@ -1,0 +1,160 @@
+body
+{
+	background-color: #272727;
+	color: #ffffff;
+	font-family: 'Comic Sans', cursive;
+	font-size: 20px;
+}
+#logo
+{
+	float: left;
+	font-family:'Comic Sans', cursive;
+	font-size: 70px;
+	width: 600px;
+	text-align: left;
+
+}
+#container
+{	
+	width: 1200px;
+	height: 100%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+.rectangle
+{
+	width: 1160px;
+	margin: 20px;
+	text-align: center;
+}
+.square
+{
+	width: 1200px;
+	text-align: center;
+	justify-content: center;
+	
+}
+.square1
+{
+	width: 1200px;
+	text-align: center;
+	/* justify-content: center; */
+	display: flex;
+}
+.square2
+{
+	width: 1200px;
+	text-align: center;
+	justify-content: center;
+	display: flex;
+}
+
+
+/*Małe kafelki funkcyjne*/
+.tile1
+{
+	border-radius: 25px;
+	/*align-items: center;*/
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	width: 159px;
+	height: 127px;
+	background-color: #2b56b3;
+	display: flex;
+	justify-content: center;
+	/* cursor: pointer; */
+}
+.tile2
+{
+	border-radius: 25px;
+	margin: 10px;
+	padding: 10px;
+	width: 230px;
+	height: 127px;
+	background-color: #3b3b3b;
+	display:inline-block;
+	text-align: center;
+	cursor: pointer;
+}
+.tile3
+{
+	border-radius: 25px;
+	margin: 10px;
+	padding: 10px;
+	width: 230px;
+	height: 127px;
+	background-color: #3b3b3b;
+	display:inline-block;
+	text-align: center;
+	/* cursor: pointer; */
+}
+
+/* Lista filtrów button */
+ .tile5
+{
+	text-align: center;
+	margin: 10px;
+	width: 230px;
+	height: 137px;
+	background-color: #3b3b3b;
+	display:inline-block;
+	cursor: pointer;
+} 
+
+/*Duże kafelki podglądowe*/
+.tile6
+{
+	margin: 10px;
+	width: 500px;
+	height: 263.75px;
+	padding: 20px;
+	/* justify-content: center; */
+	/* display: flex; */
+	/* display: table-cell; */
+}
+
+/* Copyright */
+  .copyright
+{
+	width: 1160px;
+	margin: 20px;
+	float: right;
+	text-align: center;
+}
+/*Małe kafelki - funckja podświetlenia przycisku po najechaniu myszką*/
+.tile1:hover
+{
+	background-color: #2084c2;
+}
+.tile2:hover
+{
+	background-color: #555555;
+}
+
+.tile3:hover
+{
+	background-color: #82b637;
+}
+.tile4:hover
+{
+	background-color: #cf502d;
+}
+.tile5:hover
+{
+	background-color: #555555;
+}
+
+
+#Submit:hover{
+	background-color: #a73723;
+}
+#File:hover{
+	background-color: #368b33;
+}
+.full_res:hover{
+	color: rgb(177, 177, 177);
+}
+
+

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<title>Comic service</title>
+	
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" type="text/css" />
+	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='fontello.css')}}" type="text/css" /> -->
+	<!-- <link href="{{ font_url }}" type='text/css'> -->
+	
+</head>
+
+<body>
+	<div id="container">
+			<!-- TYTUŁ -->
+			<div class="rectangle">
+				<div id="logo">Garden Station</div>
+				<div style="clear: both;"></div>
+			</div>
+			<!-- MAŁE KAFELKI FUNKCYJNE -->
+			<div class="square">
+				<!-- <div onclick="location.href='/aboutUs'"  class="tile2"><i class="icon-emo-beer"></i><br />O nas</div> -->
+				<div onclick="location.href='/about'" type="button" class="tile2"><br />O Projekcie</div>
+				<div onclick="location.href='/charts'" type="button" class="tile2"></i><br/>Statystyki dnia</div>
+
+				<div style="clear:both;"></div>
+			<div class = "square1">
+				<div class="tile1">Temperatura </br>{{airTemp}}°C </div>
+				<div class="tile1">Wilgotność powietrza</br>{{airH}}%</div>
+			 </div>
+			</br>
+			<div class = "square2">
+				<div class="tile3">Czujnik 1</br>{{SoilH1}}%</div>
+				<div class="tile3">Czujnik 2</br>{{SoilH2}}%</div>
+				<div class="tile3">Czujnik 3</br>{{SoilH3}}%</div>
+				<div class="tile3">Czujnik 4</br>{{SoilH4}}%</div>
+				<div class="tile3">Czujnik 5</br>{{SoilH5}}%</div>
+				<div class="tile3">Czujnik 6</br>{{SoilH6}}%</div>
+			</div>		
+			<div class="copyright">2021 &copy; Garden Station - Projekt inżynierski; PWr Elektronika EZI </div>
+		</div>
+				<!-- <div class="send_tile"> -->
+				<!-- <form  method="POST" action="" enctype="multipart/form-data">
+					<p><input type="file" name="file"  id="actual-btn" accept="image/jpeg" /hidden></p>
+					<p><input type="submit" name="submit_button" value="Upload"  id="actual-btn2" /hidden></p>
+					<label id="Submit" for="actual-btn2">Generuj obraz</label>
+					<label id="File" for="actual-btn">Wyślij obraz</label>
+				</form></div> -->
+
+				<!-- <br/> -->
+			<!-- </div> -->
+			<!-- Wybor ustawien filtra-->
+			<!-- <form name="filtr" action="" method="POST">
+				<p>
+					<input type="radio" name="ktory_filtr" id="domyslny" checked value="domyslny_filtr"> Domyślne ustawienia filtra </input><br>
+					<input type="radio" name="ktory_filtr" id="wlasny" value="wlasny_filtr"> Własne ustawienia filtra </input><br>
+				</p>
+			</form> -->
+			<!--DWIE DUŻE KAFELKI PODGLĄDOWE-->
+			<!-- <div class="square2">
+				
+				<div class="original">
+					<p class="preview">Oryginał</p>
+					<div class="tile6"><img	style="object-fit: cover;" width="500px" height="263.75px"  src="{{url_for('static',filename = 'upload/original.jpg')}}" ></img></div>
+				</div>
+
+				<div class="generated">
+					<p class="preview">Wygenerowany obraz</p>
+					<div class="tile6"><img style="object-fit: cover;" width="500px" height="263.75px" src="{{url_for('static',filename = 'download/changed.jpg')}}"></img> </div>
+				</div>
+				<div style="clear:both;"></div> -->
+				<!-- LINK DO OBRAZU FULL RES -->
+			<!-- </div> -->
+
+			<!--Copyright-->
+
+</body>
+</html>	
