@@ -32,7 +32,7 @@ def JSONdumpster(arr):
     "SoilSensor6": arr[7]
     }
     json_obj = json.dumps(arr, indent = 1)
-    with open("sensors.json", "w") as outfile:
+    with open("dataCapture/sensors.json", "w") as outfile:
         outfile.write(json_obj)
 
 port = "COM3"

@@ -1,24 +1,144 @@
-body
-{
-	background-color: #272727;
-	color: #ffffff;
-	font-family: 'Comic Sans', cursive;
+body{
+	background-color: #1C1D21;
+	color: #F4FAFF;
+	font-family: "Times New Roman", Times, serif;
+	/* font-family: 'Comic Sans', cursive; */
 	font-size: 20px;
 }
-#logo
+.item1 {
+	font-size: 50px;
+	grid-area: header;
+}
+.item2 {
+	grid-area: menu; 
+}
+.item3 {
+	grid-area: main;
+}
+.item4 {
+	grid-area: right;
+}
+.item5 {
+	grid-area: footer;
+}
+.grid-container {
+	display: grid;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	grid-template-areas:
+	'header header header header header header header '
+	'menu menu main main main  right right'
+	'footer footer footer footer footer footer footer ';
+
+	/* gap: 0px;
+	background-color: #424242;
+	padding: 0px; */
+}
+
+.grid-container > div {
+background-color: #1C1D21;
+text-align: center;
+padding: 10px 0;
+height: 150%;
+}
+/*Małe kafelki funkcyjne*/
+.tile1 /*Temperatura*/{
+	border-radius: 5px;
+	/*align-items: center;*/
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	width: 50%;
+	height: 50px;
+	outline: #383838 solid;
+	background-color: #8A1B15;
+	display: flex;
+	justify-content: center;
+}
+.tile1:hover{
+	background-color: #941d17;
+}
+.tile4 /*Wilgotność powietrza*/{
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	width: 50%;
+	height: 50px;
+	outline: #383838 solid;
+	background-color: #028090;
+	display: flex;
+	justify-content: center;
+}
+.tile4:hover{
+	background-color: #007b8b;
+}
+.tile2 /*Przyciski menu*/{
+	border-radius: 5px;
+	outline: 	#383838 solid;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	height: 60px;
+	background-color: #3b3b3b;
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+}
+.tile2:hover{
+	background-color: #235789;
+}
+
+.tile3 /*Wilgotność gleby*/{
+	border-radius: 5px;
+	outline: #383838 solid;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	height: 50px;
+	background-color: #8A1B15;
+	text-align: center;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center;
+}
+.tile3:hover{
+	background-color: #A22C29;
+}
+ .tile5{
+	text-align: center;
+	margin: 10px;
+	width: 230px;
+	height: 137px;
+	background-color: #3b3b3b;
+	display:inline-block;
+	cursor: pointer;
+} 
+.tile5:hover{
+	background-color: #555555;
+}
+
+/*Małe kafelki - funckja podświetlenia przycisku po najechaniu myszką*/
+
+
+
+
+
+/* #logo
 {
 	float: left;
-	font-family:'Comic Sans', cursive;
+	font-family: "Times New Roman", Times, serif;
 	font-size: 70px;
-	width: 600px;
+	width: auto;
 	text-align: left;
-
 }
 #container
 {	
 	width: 1200px;
 	height: 100%;
 	text-align: center;
+	justify-content: center;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -39,7 +159,6 @@ body
 {
 	width: 1200px;
 	text-align: center;
-	/* justify-content: center; */
 	display: flex;
 }
 .square2
@@ -48,113 +167,20 @@ body
 	text-align: center;
 	justify-content: center;
 	display: flex;
-}
-
-
-/*Małe kafelki funkcyjne*/
-.tile1
-{
-	border-radius: 25px;
-	/*align-items: center;*/
-	margin-left: auto;
-	margin-right: auto;
-	padding: 10px;
-	width: 159px;
-	height: 127px;
-	background-color: #2b56b3;
-	display: flex;
-	justify-content: center;
-	/* cursor: pointer; */
-}
-.tile2
-{
-	border-radius: 25px;
-	margin: 10px;
-	padding: 10px;
-	width: 230px;
-	height: 127px;
-	background-color: #3b3b3b;
-	display:inline-block;
-	text-align: center;
-	cursor: pointer;
-}
-.tile3
-{
-	border-radius: 25px;
-	margin: 10px;
-	padding: 10px;
-	width: 230px;
-	height: 127px;
-	background-color: #3b3b3b;
-	display:inline-block;
-	text-align: center;
-	/* cursor: pointer; */
-}
-
-/* Lista filtrów button */
- .tile5
-{
-	text-align: center;
-	margin: 10px;
-	width: 230px;
-	height: 137px;
-	background-color: #3b3b3b;
-	display:inline-block;
-	cursor: pointer;
-} 
-
-/*Duże kafelki podglądowe*/
-.tile6
-{
-	margin: 10px;
-	width: 500px;
-	height: 263.75px;
-	padding: 20px;
-	/* justify-content: center; */
-	/* display: flex; */
-	/* display: table-cell; */
-}
-
+} */
 /* Copyright */
-  .copyright
+  /* .copyright
 {
 	width: 1160px;
 	margin: 20px;
 	float: right;
 	text-align: center;
-}
-/*Małe kafelki - funckja podświetlenia przycisku po najechaniu myszką*/
-.tile1:hover
+} */
+/*Duże kafelki podglądowe*/
+/* .tile6
 {
-	background-color: #2084c2;
-}
-.tile2:hover
-{
-	background-color: #555555;
-}
-
-.tile3:hover
-{
-	background-color: #82b637;
-}
-.tile4:hover
-{
-	background-color: #cf502d;
-}
-.tile5:hover
-{
-	background-color: #555555;
-}
-
-
-#Submit:hover{
-	background-color: #a73723;
-}
-#File:hover{
-	background-color: #368b33;
-}
-.full_res:hover{
-	color: rgb(177, 177, 177);
-}
-
-
+	margin: 10px;
+	width: 500px;
+	height: 263.75px;
+	padding: 20px;
+} */
