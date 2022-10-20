@@ -1,25 +1,33 @@
+from datetime import datetime
 from socket import timeout
-from time import sleep
 import serial
 import csv
 import _thread
-from datetime import datetime
 import re 
 import json
+import glob
+import sys
 
+# Zapisz historię pomiarów do pliku csv
 def save_to_csv(tab):
-    file = open("pomiary.csv", 'a') #otwórz plik pomiary.csv
 
+    file = open("dataCapture/pomiary.csv", 'a') #otwórz plik pomiary.csv
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y,%H:%M:%S")
+    file.write(dt_string)
+    file.write(',')
     for i in range (0, len(tab)):  #for tyle razy ile jak duża jest tablica wejściowa
+
         file.write(str(tab[i])) #zapisz do pliku wartość daną na csv
         if i == len(tab)-1:
             pass
         else:
             file.write(',')
-
     file.write('\n')
     file.close()
 
+
+#Zapisz do JSONa  - wartości z ostatniego pobrania wartości z czujników 
 def JSONdumpster(arr):
     arr = {
     "Temperature": arr[0],
@@ -32,11 +40,72 @@ def JSONdumpster(arr):
     "SoilSensor6": arr[7]
     }
     json_obj = json.dumps(arr, indent = 1)
+
     with open("dataCapture/sensors.json", "w") as outfile:
         outfile.write(json_obj)
+    # with open("sensors.json", "w") as outfile:
+    #     outfile.write(json_obj)
 
-port = "COM3"
-serialPort = serial.Serial(port="COM3",baudrate=38400,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=10)
+        
+ #Sprawdź platformę na której skrypt działa, potem sprawdź dostępne porty i zwróć użytkownikowi
+def serial_ports():
+    print("Checking for avaiable serial ports on your computer")
+
+    if sys.platform.startswith('win'):
+        ports = ['COM%s' % (i + 1) for i in range(256)]
+
+    elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+        # this excludes your current terminal "/dev/tty"
+        ports = glob.glob('/dev/tty[A-Za-z]*')
+
+    elif sys.platform.startswith('darwin'):
+        ports = glob.glob('/dev/tty.*')
+
+    else:
+        raise EnvironmentError('Unsupported platform')
+
+    result = []
+
+    for port in ports:
+        try:
+            s = serial.Serial(port)
+            s.close()
+            result.append(port)
+        except (OSError, serial.SerialException):
+            pass
+    return result        
+
+def choosePort():
+    serialPortList = serial_ports()
+    print("Avaiable ports: ")
+
+    if not serialPortList:
+        print("No ports detected! Make sure you connected MCU to system / No other monitoring serial port process is running ")
+        sys.exit()
+
+    for i in range (0, len(serialPortList)):
+        print(str(i+1) + ". " + str(serialPortList[i]))
+
+    listSize = len(serialPortList)
+    print("Select port which is connected to microcontroller by entering number: ")
+
+    while 1:
+        try:
+            answer = int(input())
+            if answer - 1 < listSize and answer > 0:
+                break
+        except ValueError:
+            print("Enter only digit / Value entered is out of range")
+            continue
+
+    print("Selected port: " + serialPortList[answer - 1])
+    return serialPortList[answer - 1]
+
+print("Detected OS: " + sys.platform)
+port = choosePort()
+serialPort = serial.Serial(port,baudrate=38400,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=None) #timeout=None każe czekać nonstop na przychodzące dane, jeśli damy jakąś stałą, to po nie otrzymaniu danych w zadanym czasie zwróci błąd potem.
+print("Running - Do not close this terminal in order to mantain capturing data")
+
 while True:
     strUART = serialPort.readline()
     rawSensorData = strUART.decode('utf8')
@@ -45,3 +114,4 @@ while True:
     sensors.pop(0)
     print(sensors)
     JSONdumpster(sensors)
+    save_to_csv(sensors)

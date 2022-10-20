@@ -97,14 +97,14 @@ height: 150%;
 	margin-right: auto;
 	width: 50%;
 	height: 50px;
-	background-color: #8A1B15;
+	background-color:#355E3B	;
 	text-align: center;
 	vertical-align: middle;
 	display: flex;
 	justify-content: center;
 }
 .tile3:hover{
-	background-color: #A22C29;
+	background-color: #3a6841;
 }
  .tile5{
 	text-align: center;
