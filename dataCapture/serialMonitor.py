@@ -7,10 +7,14 @@ import re
 import json
 import glob
 import sys
+import time 
+
+# def sendSignal():
+#     time.sleep(1)
+#     serialPort.write("W\r".encode())
 
 # Zapisz historię pomiarów do pliku csv
 def save_to_csv(tab):
-
     file = open("dataCapture/pomiary.csv", 'a') #otwórz plik pomiary.csv
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y,%H:%M:%S")
@@ -25,8 +29,7 @@ def save_to_csv(tab):
             file.write(',')
     file.write('\n')
     file.close()
-
-
+#===================================================================================================================================
 #Zapisz do JSONa  - wartości z ostatniego pobrania wartości z czujników 
 def JSONdumpster(arr):
     arr = {
@@ -43,11 +46,8 @@ def JSONdumpster(arr):
 
     with open("dataCapture/sensors.json", "w") as outfile:
         outfile.write(json_obj)
-    # with open("sensors.json", "w") as outfile:
-    #     outfile.write(json_obj)
-
-        
- #Sprawdź platformę na której skrypt działa, potem sprawdź dostępne porty i zwróć użytkownikowi
+#===================================================================================================================================
+#Sprawdź platformę na której skrypt działa, potem sprawdź dostępne porty i zwróć użytkownikowi
 def serial_ports():
     print("Checking for avaiable serial ports on your computer")
 
@@ -75,43 +75,45 @@ def serial_ports():
             pass
     return result        
 
-def choosePort():
+def detectPort():
+    #Wczytaj dostępne porty szeregowy
     serialPortList = serial_ports()
     print("Avaiable ports: ")
-
+#===================================================================================================================================
     if not serialPortList:
         print("No ports detected! Make sure you connected MCU to system / No other monitoring serial port process is running ")
         sys.exit()
-
+    #Ponumerowana lista portów
     for i in range (0, len(serialPortList)):
         print(str(i+1) + ". " + str(serialPortList[i]))
-
-    listSize = len(serialPortList)
-    print("Select port which is connected to microcontroller by entering number: ")
-
-    while 1:
-        try:
-            answer = int(input())
-            if answer - 1 < listSize and answer > 0:
-                break
-        except ValueError:
-            print("Enter only digit / Value entered is out of range")
-            continue
-
-    print("Selected port: " + serialPortList[answer - 1])
-    return serialPortList[answer - 1]
+#===================================================================================================================================
+    # listSize = len(serialPortList)
+    # print("Select port which is connected to microcontroller by entering number: ")
+    # #Kontrola poprawności wyboru portu
+    # while 1:
+    #     try:
+    #         answer = int(input())
+    #         if answer - 1 < listSize and answer > 0:
+    #             break
+    #     except ValueError:
+    #         print("Enter only digit / Value entered is out of range")
+    #         continue
+#===================================================================================================================================
+    print("Detected port: " + serialPortList[0])
+    return serialPortList[0]
 
 print("Detected OS: " + sys.platform)
-port = choosePort()
+port = detectPort()
 serialPort = serial.Serial(port,baudrate=38400,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=None) #timeout=None każe czekać nonstop na przychodzące dane, jeśli damy jakąś stałą, to po nie otrzymaniu danych w zadanym czasie zwróci błąd potem.
 print("Running - Do not close this terminal in order to mantain capturing data")
-
+#Nieskończona pętla monitorująca port szeregowy w poszukiwaniu przychodzących danych
 while True:
-    strUART = serialPort.readline()
-    rawSensorData = strUART.decode('utf8')
-    rawSensorData = rawSensorData.strip('\n')
-    sensors = rawSensorData.split("S")
-    sensors.pop(0)
-    print(sensors)
-    JSONdumpster(sensors)
-    save_to_csv(sensors)
+        while serialPort.in_waiting:
+            strUART = serialPort.readline()
+            rawSensorData = strUART.decode('utf8')
+            rawSensorData = rawSensorData.strip('\n')
+            sensors = rawSensorData.split("S")
+            sensors.pop(0)
+            print(sensors)
+            JSONdumpster(sensors)
+            save_to_csv(sensors)
