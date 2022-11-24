@@ -1,10 +1,10 @@
 {
- "Temperature": "19",
- "AirHumidity": "70",
- "SoilSensor1": "0",
- "SoilSensor2": "0",
- "SoilSensor3": "0",
- "SoilSensor4": "2",
- "SoilSensor5": "0",
- "SoilSensor6": "0"
+ "Temperature": "18",
+ "AirHumidity": "57",
+ "SoilSensor1": "100",
+ "SoilSensor2": "100",
+ "SoilSensor3": "100",
+ "SoilSensor4": "100",
+ "SoilSensor5": "100",
+ "SoilSensor6": "100"
 }

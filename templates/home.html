@@ -10,8 +10,6 @@
 	<meta name="keywords" content="" />
 	
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" type="text/css" />
-	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='fontello.css')}}" type="text/css" /> -->
-	<!-- <link href="{{ font_url }}" type='text/css'> -->
 
 </head>
 
@@ -25,7 +23,6 @@
 		<div onclick="location.href='/charts'" type="button" class="tile2"></i><br/>Statystyki dnia</div></br>
 		<div onclick="location.href='/settings'" type="button" class="tile2"></i><br/>Ustawienia</div> </br>
 		<!-- <div onclick="location.href='/dataCapture'" type="button" class="tile2"></i><br/>Uruchom przechwytywanie danych</div> </br> -->
-		<!-- <div onclick="location.href='/waterGarden'" type="button" class="tile2"></i><br/>Rozpocznij podlewanie</div> -->
 
 	</div>
 		<div class="item3">				
@@ -39,7 +36,10 @@
 		<div class="item4">
 			<div class="tile1">Temperatura </br>{{airTemp}}°C </div></br>
 			<div class="tile4">Wilgotność powietrza</br>{{airH}}%</div></br>
-			<div class="tile6">Średnia czujników gleby</br>{{avg}}%</div>	
+			<div class="tile6">Średnia czujników gleby</br>{{avg}}%</div></br>
+			<div class="tile7">Tryb podlewania</br>{{mode}}</div></br>
+			<div class="tile7">Próg podlewania</br>{{Threshold}}%</div>	</br>
+			<div class="tile7">Ustawiony czas podlewania</br>{{irrigtime}} minut</div>	
 	</div>
 		<div class="item5">2022 &copy; Garden Station - Projekt inżynierski; PWr Elektronika EZI</div>
 	  </div>
