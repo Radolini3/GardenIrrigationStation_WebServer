@@ -2,19 +2,16 @@ from curses import raw
 from datetime import datetime
 from socket import timeout
 import serial
-import csv
-import _thread
-import re 
 import json
 import glob
 import sys
-import time 
+
 
 # Zapisz historię pomiarów do pliku csv
 def save_to_csv(tab):
     file = open("dataCapture/pomiary.csv", 'a') #otwórz plik pomiary.csv
     now = datetime.now()
-    dt_string = now.strftime("%d/%m/%Y,%H:%M:%S")
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     file.write(dt_string)
     file.write(',')
     for i in range (0, len(tab)):  #for tyle razy ile jak duża jest tablica wejściowa
@@ -24,7 +21,7 @@ def save_to_csv(tab):
             pass
         else:
             file.write(',')
-    file.write('\n')
+    file.write(',\n')
     file.close()
 #===================================================================================================================================
 #Zapisz do JSONa  - wartości z ostatniego pobrania wartości z czujników 

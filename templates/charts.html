@@ -10,11 +10,493 @@
 	<meta name="keywords" content="" />
 	
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" type="text/css" />
-
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class = "grid-container">
-        <div class ="item1">Statystyki z dnia</div>
-
+        <div class ="item1">Historia pomiarów</div>
     </div>
+
+	<div class = "chart-container">
+		<div class = "chart-wrapper">
+			<div class = "chartT">
+			<!-- ================================================ -->
+			<canvas id="lineChart" width="800" height="400"></canvas>
+			<script>
+				var ctx = document.getElementById("lineChart").getContext("2d");
+				var lineChart = new Chart(ctx, {
+					type: "line",
+					data: {
+						labels: {{ dateTime | safe }},
+						datasets: [
+							{
+								label: "Temperatura",
+								data: {{ AirT | safe }},
+								fill: false,
+								borderColor: "rgb(255,0,0)",
+								lineTension: 0.3
+							}
+						]
+
+					},
+					options:{
+						responsive: false,
+						scales: {
+							y: {
+								ticks: {color: 'rgb(200,200,200)'},
+								grid:{color: 'rgb(128,128,128)'}
+							},
+							x: {
+								ticks: { color: 'rgb(200,200,200)' },
+								grid:{color: 'rgb(128,128,128)'}
+							}
+							},
+
+						
+						plugins: {
+						legend: {
+							display: false,
+							labels: {
+								color: 'rgb(200,200,200)'
+							}
+						},
+						title: {
+							display: true,
+							text: 'Temperatura [°C]',
+							color: 'rgb(200,200,200)',
+							font: {size: 24}
+						}
+						},
+					}
+				});
+			</script>
+			</div>
+			<!-- ================================================ -->
+			<div class = "chartH">
+			<canvas id="lineChart2" width="800" height="400"></canvas>
+			<script>
+				var ctx = document.getElementById("lineChart2").getContext("2d");
+				var lineChart = new Chart(ctx, {
+					type: "line",
+					data: {
+						labels: {{ dateTime | safe }},
+						datasets: [
+							{
+								label: "Wilgotność powietrza",
+								data: {{ AirH | safe }},
+								fill: false,
+								borderColor: "rgb(0,191,255)",
+								lineTension: 0.3
+							}
+						]
+
+					},
+					options:{
+						responsive: false,
+						scales: {
+							y: {
+								ticks: {color: 'rgb(200,200,200)'},
+								grid:{color: 'rgb(128,128,128)'}
+							},
+							x: {
+								ticks: { color: 'rgb(200,200,200)' },
+								grid:{color: 'rgb(128,128,128)'}
+							}
+							},
+
+						
+						plugins: {
+						legend: {
+							display: false,
+							labels: {
+								color: 'rgb(200,200,200)'
+							}
+						},
+						title: {
+							display: true,
+							text: 'Wilgotność powietrza [%]',
+							color: 'rgb(200,200,200)',
+							font: {size: 24}
+						}
+						},
+					}
+				});
+			</script>
+			</div>
+		</div>
+		<div class = "chart-wrapper">
+			<div class = "chartAVG">
+			<canvas id="lineChart9" width="1850" height="400"></canvas>
+			<script>
+				var ctx = document.getElementById("lineChart9").getContext("2d");
+				var lineChart = new Chart(ctx, {
+					type: "line",
+					data: {
+						labels: {{ dateTime | safe }},
+						datasets: [
+							{
+								label: "Średnia z pomiarów wilgotności gleby",
+								data: {{ SoilAvg | safe }},
+								fill: false,
+								borderColor: "rgb(124,252,0)",
+								lineTension: 0.3
+							}
+						]
+
+					},
+					options:{
+						responsive: false,
+						scales: {
+							y: {
+								ticks: {color: 'rgb(200,200,200)'},
+								grid:{color: 'rgb(128,128,128)'}
+							},
+							x: {
+								ticks: { color: 'rgb(200,200,200)' },
+								grid:{color: 'rgb(128,128,128)'}
+							}
+							},
+
+						
+						plugins: {
+						legend: {
+							display: false,
+							labels: {
+								color: 'rgb(200,200,200)'
+							}
+						},
+						title: {
+							display: true,
+							text: 'Średnia z pomiarów wilgotności gleby [%]',
+							color: 'rgb(200,200,200)',
+							font: {size: 24}
+						}
+						},
+					}
+
+				});
+			</script>
+			</div>
+		</div>
+		<!-- ================================================ -->
+		<div class = "chart-wrapper">
+			<div class = "chartS1">
+			<canvas id="lineChart3" width="800" height="400"></canvas>
+			<script>
+				var ctx = document.getElementById("lineChart3").getContext("2d");
+				var lineChart = new Chart(ctx, {
+					type: "line",
+					data: {
+						labels: {{ dateTime | safe }},
+						datasets: [
+							{
+								label: "Czujnik wilgotności 1",
+								data: {{ Soil1 | safe }},
+								fill: false,
+								borderColor: "rgb(70, 130, 180)",
+								lineTension: 0.3
+							}
+						]
+
+					},
+					options:{
+						responsive: false,
+						scales: {
+							y: {
+								ticks: {color: 'rgb(200,200,200)'},
+								grid:{color: 'rgb(128,128,128)'}
+							},
+							x: {
+								ticks: { color: 'rgb(200,200,200)' },
+								grid:{color: 'rgb(128,128,128)'}
+							}
+							},
+
+						
+						plugins: {
+						legend: {
+							display: false,
+							labels: {
+								color: 'rgb(200,200,200)'
+							}
+						},
+						title: {
+							display: true,
+							text: 'Czujnik wilgotności 1 [%]',
+							color: 'rgb(200,200,200)',
+							font: {size: 24}
+						}
+						},
+					}
+				});
+			</script>
+			</div>
+			<!-- ================================================ -->
+			<div class = "chartS2">
+			<canvas id="lineChart4" width="800" height="400"></canvas>
+			<script>
+				var ctx = document.getElementById("lineChart4").getContext("2d");
+				var lineChart = new Chart(ctx, {
+					type: "line",
+					data: {
+						labels: {{ dateTime | safe }},
+						datasets: [
+							{
+								label: "Czujnik wilgotności 2",
+								data: {{ Soil2 | safe }},
+								fill: false,
+								borderColor: "rgb(70, 130, 180)",
+								lineTension: 0.3
+							}
+						]
+
+					},
+					options:{
+						responsive: false,
+						scales: {
+							y: {
+								ticks: {color: 'rgb(200,200,200)'},
+								grid:{color: 'rgb(128,128,128)'}
+							},
+							x: {
+								ticks: { color: 'rgb(200,200,200)' },
+								grid:{color: 'rgb(128,128,128)'}
+							}
+							},
+
+						
+						plugins: {
+						legend: {
+							display: false,
+							labels: {
+								color: 'rgb(200,200,200)'
+							}
+						},
+						title: {
+							display: true,
+							text: 'Czujnik wilgotności 2 [%]',
+							color: 'rgb(200,200,200)',
+							font: {size: 24}
+						}
+						},
+					}
+				});
+			</script>
+			</div>
+		</div>
+		<div class = "chart-wrapper">
+		<!-- ================================================ -->
+			<div class = "chartS3">
+			<canvas id="lineChart5" width="800" height="400"></canvas>
+			<script>
+				var ctx = document.getElementById("lineChart5").getContext("2d");
+				var lineChart = new Chart(ctx, {
+					type: "line",
+					data: {
+						labels: {{ dateTime | safe }},
+						datasets: [
+							{
+								label: "Czujnik wilgotności 3",
+								data: {{ Soil3 | safe }},
+								fill: false,
+								borderColor: "rgb(70, 130, 180)",
+								lineTension: 0.3
+							}
+						]
+
+					},
+					options:{
+						responsive: false,
+						scales: {
+							y: {
+								ticks: {color: 'rgb(200,200,200)'},
+								grid:{color: 'rgb(128,128,128)'}
+							},
+							x: {
+								ticks: { color: 'rgb(200,200,200)' },
+								grid:{color: 'rgb(128,128,128)'}
+							}
+							},
+
+						
+						plugins: {
+						legend: {
+							display: false,
+							labels: {
+								color: 'rgb(200,200,200)'
+							}
+						},
+						title: {
+							display: true,
+							text: 'Czujnik wilgotności 3 [%]',
+							color: 'rgb(200,200,200)',
+							font: {size: 24}
+						}
+						},
+					}
+				});
+			</script>
+			</div>
+			<!-- ================================================ -->
+			<div class = "chartS4">
+			<canvas id="lineChart6" width="800" height="400"></canvas>
+			<script>
+				var ctx = document.getElementById("lineChart6").getContext("2d");
+				var lineChart = new Chart(ctx, {
+					type: "line",
+					data: {
+						labels: {{ dateTime | safe }},
+						datasets: [
+							{
+								label: "Czujnik wilgotności 4",
+								data: {{ Soil4 | safe }},
+								fill: false,
+								borderColor: "rgb(70, 130, 180)",
+								lineTension: 0.3
+							}
+						]
+
+					},
+					options:{
+						responsive: false,
+						scales: {
+							y: {
+								ticks: {color: 'rgb(200,200,200)'},
+								grid:{color: 'rgb(128,128,128)'}
+							},
+							x: {
+								ticks: { color: 'rgb(200,200,200)' },
+								grid:{color: 'rgb(128,128,128)'}
+							}
+							},
+
+						
+						plugins: {
+						legend: {
+							display: false,
+							labels: {
+								color: 'rgb(200,200,200)'
+							}
+						},
+						title: {
+							display: true,
+							text: 'Czujnik wilgotności 4 [%]',
+							color: 'rgb(200,200,200)',
+							font: {size: 24}
+						}
+						},
+					}
+				});
+			</script>
+			</div>
+		</div>
+		<div class = "chart-wrapper">
+		<!-- ================================================ -->
+			<div class = "chartS5">
+			<canvas id="lineChart7" width="800" height="400"></canvas>
+			<script>
+				var ctx = document.getElementById("lineChart7").getContext("2d");
+				var lineChart = new Chart(ctx, {
+					type: "line",
+					data: {
+						labels: {{ dateTime | safe }},
+						datasets: [
+							{
+								label: "Czujnik wilgotności 5",
+								data: {{ Soil5 | safe }},
+								fill: false,
+								borderColor: "rgb(70, 130, 180)",
+								lineTension: 0.3
+							}
+						]
+
+					},
+					options:{
+						responsive: false,
+						scales: {
+							y: {
+								ticks: {color: 'rgb(200,200,200)'},
+								grid:{color: 'rgb(128,128,128)'}
+							},
+							x: {
+								ticks: { color: 'rgb(200,200,200)' },
+								grid:{color: 'rgb(128,128,128)'}
+							}
+							},
+
+						
+						plugins: {
+						legend: {
+							display: false,
+							labels: {
+								color: 'rgb(200,200,200)'
+							}
+						},
+						title: {
+							display: true,
+							text: 'Czujnik wilgotności 5 [%]',
+							color: 'rgb(200,200,200)',
+							font: {size: 24}
+						}
+						},
+					}
+				});
+			</script>
+			</div>
+			<!-- ================================================ -->
+			<div class = "chartS6">
+			<canvas id="lineChart8" width="800" height="400"></canvas>
+			<script>
+				var ctx = document.getElementById("lineChart8").getContext("2d");
+				var lineChart = new Chart(ctx, {
+					type: "line",
+					data: {
+						labels: {{ dateTime | safe }},
+						datasets: [
+							{
+								label: "Czujnik wilgotności 6",
+								data: {{ Soil6 | safe }},
+								fill: false,
+								borderColor: "rgb(70, 130, 180)",
+								lineTension: 0.3
+							}
+						]
+
+					},
+					options:{
+						responsive: false,
+						scales: {
+							y: {
+								ticks: {color: 'rgb(200,200,200)'},
+								grid:{color: 'rgb(128,128,128)'}
+							},
+							x: {
+								ticks: { color: 'rgb(200,200,200)' },
+								grid:{color: 'rgb(128,128,128)'}
+							}
+							},
+
+						
+						plugins: {
+						legend: {
+							display: false,
+							labels: {
+								color: 'rgb(200,200,200)'
+							}
+						},
+						title: {
+							display: true,
+							text: 'Czujnik wilgotności 6 [%]',
+							color: 'rgb(200,200,200)',
+							font: {size: 24}
+						}
+						},
+					}
+				});
+			</script>
+			</div>
+				<!-- ================================================ -->
+		</div>
+
+	</div>
 </body>
