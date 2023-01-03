@@ -2,7 +2,6 @@ body{
 	background-color: #1C1D21;
 	color: #F4FAFF;
 	font-family: "Times New Roman", Times, serif;
-	/* font-family: 'Comic Sans', cursive; */
 	font-size: 20px;
 }
 .item1 {
@@ -30,18 +29,12 @@ body{
 	'header header header header header header header header header '
 	'menu menu menu main main main main  right right'
 	'footer footer footer footer footer footer footer footer footer ';
-
-	/* gap: 0px;
-	background-color: #424242;
-	padding: 0px; */
 }
 .grid-container > div {
 background-color: #1C1D21;
 text-align: center;
-/* padding: 10px 0; */
 height: 150%;
 }
-
 
 .chart-container {
 	display: flex;
@@ -152,7 +145,7 @@ height: 150%;
 	background-color: #cc8500;
 }
 
-.tile7 /*Wilgotność powietrza*/{
+.tile7 /*Ustawienia*/{
 	border-radius: 5px;
 	margin-left: auto;
 	margin-right: auto;
@@ -167,70 +160,3 @@ height: 150%;
 .tile7:hover{
 	background-color: #21384d;
 }
-
-
-/*Małe kafelki - funckja podświetlenia przycisku po najechaniu myszką*/
-
-
-
-
-
-/* #logo
-{
-	float: left;
-	font-family: "Times New Roman", Times, serif;
-	font-size: 70px;
-	width: auto;
-	text-align: left;
-}
-#container
-{	
-	width: 1200px;
-	height: 100%;
-	text-align: center;
-	justify-content: center;
-	margin-left: auto;
-	margin-right: auto;
-}
-.rectangle
-{
-	width: 1160px;
-	margin: 20px;
-	text-align: center;
-}
-.square
-{
-	width: 1200px;
-	text-align: center;
-	justify-content: center;
-	
-}
-.square1
-{
-	width: 1200px;
-	text-align: center;
-	display: flex;
-}
-.square2
-{
-	width: 1200px;
-	text-align: center;
-	justify-content: center;
-	display: flex;
-} */
-/* Copyright */
-  /* .copyright
-{
-	width: 1160px;
-	margin: 20px;
-	float: right;
-	text-align: center;
-} */
-/*Duże kafelki podglądowe*/
-/* .tile6
-{
-	margin: 10px;
-	width: 500px;
-	height: 263.75px;
-	padding: 20px;
-} */

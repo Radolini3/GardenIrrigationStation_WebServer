@@ -20,7 +20,7 @@
 	<div class = "chart-container">
 		<div class = "chart-wrapper">
 			<div class = "chartT">
-			<!-- ================================================ -->
+			<!-- ===================Wykres temperatury=================== -->
 			<canvas id="lineChart" width="800" height="400"></canvas>
 			<script>
 				var ctx = document.getElementById("lineChart").getContext("2d");
@@ -34,7 +34,7 @@
 								data: {{ AirT | safe }},
 								fill: false,
 								borderColor: "rgb(255,0,0)",
-								lineTension: 0.3
+								lineTension: 0.2
 							}
 						]
 
@@ -44,7 +44,9 @@
 						scales: {
 							y: {
 								ticks: {color: 'rgb(200,200,200)'},
-								grid:{color: 'rgb(128,128,128)'}
+								grid:{color: 'rgb(128,128,128)'},
+								suggestedMin: 0,
+								suggestedMax: 30
 							},
 							x: {
 								ticks: { color: 'rgb(200,200,200)' },
@@ -71,7 +73,7 @@
 				});
 			</script>
 			</div>
-			<!-- ================================================ -->
+			<!-- ===================Wykres wilgotności powietrza=================== -->
 			<div class = "chartH">
 			<canvas id="lineChart2" width="800" height="400"></canvas>
 			<script>
@@ -86,7 +88,7 @@
 								data: {{ AirH | safe }},
 								fill: false,
 								borderColor: "rgb(0,191,255)",
-								lineTension: 0.3
+								lineTension: 0.2
 							}
 						]
 
@@ -96,7 +98,9 @@
 						scales: {
 							y: {
 								ticks: {color: 'rgb(200,200,200)'},
-								grid:{color: 'rgb(128,128,128)'}
+								grid:{color: 'rgb(128,128,128)'},
+								suggestedMin: 0,
+								max: 100
 							},
 							x: {
 								ticks: { color: 'rgb(200,200,200)' },
@@ -124,6 +128,7 @@
 			</script>
 			</div>
 		</div>
+	<!-- ===================Wykres średniej wilgotności gleby=================== -->
 		<div class = "chart-wrapper">
 			<div class = "chartAVG">
 			<canvas id="lineChart9" width="1850" height="400"></canvas>
@@ -139,7 +144,7 @@
 								data: {{ SoilAvg | safe }},
 								fill: false,
 								borderColor: "rgb(124,252,0)",
-								lineTension: 0.3
+								lineTension: 0.2
 							}
 						]
 
@@ -149,7 +154,9 @@
 						scales: {
 							y: {
 								ticks: {color: 'rgb(200,200,200)'},
-								grid:{color: 'rgb(128,128,128)'}
+								grid:{color: 'rgb(128,128,128)'},
+								suggestedMin: 0,
+								max: 100
 							},
 							x: {
 								ticks: { color: 'rgb(200,200,200)' },
@@ -178,7 +185,7 @@
 			</script>
 			</div>
 		</div>
-		<!-- ================================================ -->
+		<!-- ===================Wykres czujnika gleby 1=================== -->
 		<div class = "chart-wrapper">
 			<div class = "chartS1">
 			<canvas id="lineChart3" width="800" height="400"></canvas>
@@ -194,7 +201,7 @@
 								data: {{ Soil1 | safe }},
 								fill: false,
 								borderColor: "rgb(70, 130, 180)",
-								lineTension: 0.3
+								lineTension: 0.2
 							}
 						]
 
@@ -204,7 +211,9 @@
 						scales: {
 							y: {
 								ticks: {color: 'rgb(200,200,200)'},
-								grid:{color: 'rgb(128,128,128)'}
+								grid:{color: 'rgb(128,128,128)'},
+								suggestedMin: 0,
+								max: 100
 							},
 							x: {
 								ticks: { color: 'rgb(200,200,200)' },
@@ -231,7 +240,7 @@
 				});
 			</script>
 			</div>
-			<!-- ================================================ -->
+		<!-- ===================Wykres czujnika gleby 2=================== -->
 			<div class = "chartS2">
 			<canvas id="lineChart4" width="800" height="400"></canvas>
 			<script>
@@ -246,7 +255,7 @@
 								data: {{ Soil2 | safe }},
 								fill: false,
 								borderColor: "rgb(70, 130, 180)",
-								lineTension: 0.3
+								lineTension: 0.2
 							}
 						]
 
@@ -256,7 +265,9 @@
 						scales: {
 							y: {
 								ticks: {color: 'rgb(200,200,200)'},
-								grid:{color: 'rgb(128,128,128)'}
+								grid:{color: 'rgb(128,128,128)'},
+								suggestedMin: 0,
+								max: 100
 							},
 							x: {
 								ticks: { color: 'rgb(200,200,200)' },
@@ -285,7 +296,7 @@
 			</div>
 		</div>
 		<div class = "chart-wrapper">
-		<!-- ================================================ -->
+		<!-- ===================Wykres czujnika gleby 3=================== -->
 			<div class = "chartS3">
 			<canvas id="lineChart5" width="800" height="400"></canvas>
 			<script>
@@ -300,7 +311,7 @@
 								data: {{ Soil3 | safe }},
 								fill: false,
 								borderColor: "rgb(70, 130, 180)",
-								lineTension: 0.3
+								lineTension: 0.2
 							}
 						]
 
@@ -310,7 +321,9 @@
 						scales: {
 							y: {
 								ticks: {color: 'rgb(200,200,200)'},
-								grid:{color: 'rgb(128,128,128)'}
+								grid:{color: 'rgb(128,128,128)'},
+								suggestedMin: 0,
+								max: 100
 							},
 							x: {
 								ticks: { color: 'rgb(200,200,200)' },
@@ -337,7 +350,7 @@
 				});
 			</script>
 			</div>
-			<!-- ================================================ -->
+		<!-- ===================Wykres czujnika gleby 4=================== -->
 			<div class = "chartS4">
 			<canvas id="lineChart6" width="800" height="400"></canvas>
 			<script>
@@ -352,7 +365,7 @@
 								data: {{ Soil4 | safe }},
 								fill: false,
 								borderColor: "rgb(70, 130, 180)",
-								lineTension: 0.3
+								lineTension: 0.2
 							}
 						]
 
@@ -362,7 +375,9 @@
 						scales: {
 							y: {
 								ticks: {color: 'rgb(200,200,200)'},
-								grid:{color: 'rgb(128,128,128)'}
+								grid:{color: 'rgb(128,128,128)'},
+								suggestedMin: 0,
+								max: 100
 							},
 							x: {
 								ticks: { color: 'rgb(200,200,200)' },
@@ -391,7 +406,7 @@
 			</div>
 		</div>
 		<div class = "chart-wrapper">
-		<!-- ================================================ -->
+		<!-- ===================Wykres czujnika gleby 5=================== -->
 			<div class = "chartS5">
 			<canvas id="lineChart7" width="800" height="400"></canvas>
 			<script>
@@ -406,7 +421,7 @@
 								data: {{ Soil5 | safe }},
 								fill: false,
 								borderColor: "rgb(70, 130, 180)",
-								lineTension: 0.3
+								lineTension: 0.2
 							}
 						]
 
@@ -416,7 +431,9 @@
 						scales: {
 							y: {
 								ticks: {color: 'rgb(200,200,200)'},
-								grid:{color: 'rgb(128,128,128)'}
+								grid:{color: 'rgb(128,128,128)'},
+								suggestedMin: 0,
+								max: 100
 							},
 							x: {
 								ticks: { color: 'rgb(200,200,200)' },
@@ -443,7 +460,7 @@
 				});
 			</script>
 			</div>
-			<!-- ================================================ -->
+		<!-- ===================Wykres czujnika gleby 6=================== -->
 			<div class = "chartS6">
 			<canvas id="lineChart8" width="800" height="400"></canvas>
 			<script>
@@ -458,7 +475,7 @@
 								data: {{ Soil6 | safe }},
 								fill: false,
 								borderColor: "rgb(70, 130, 180)",
-								lineTension: 0.3
+								lineTension: 0.2
 							}
 						]
 
@@ -468,7 +485,9 @@
 						scales: {
 							y: {
 								ticks: {color: 'rgb(200,200,200)'},
-								grid:{color: 'rgb(128,128,128)'}
+								grid:{color: 'rgb(128,128,128)'},
+								suggestedMin: 0,
+								max: 100
 							},
 							x: {
 								ticks: { color: 'rgb(200,200,200)' },

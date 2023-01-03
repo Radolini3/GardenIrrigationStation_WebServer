@@ -1,9 +1,5 @@
-from datetime import datetime
 from curses.ascii import SO
 import sys
-
-from operator import methodcaller
-from urllib import request
 from flask import Flask, render_template, json, url_for, jsonify
 import csv 
 
@@ -12,7 +8,7 @@ app = Flask(__name__)
 #Dodanie ścieżki do skryptów pythona 
 sys.path.insert(0, '/dataCapture')
 
-@app.route("/") 
+@app.route("/") # Endpoint strony głównej - ładowanie JSONów 
 def home():
     #Otwórz plik sensors.json 
     with open('./dataCapture/sensors.json', 'r') as myfile:
@@ -30,7 +26,7 @@ def home():
          int(data['SoilSensor6'])]
         average = int(sum(SoilSensors)/len(SoilSensors)) # Średnia z ponmiarów czujników wilgotności
 
-    with open('./dataCapture/config.json', 'r') as myfile2:
+    with open('./dataCapture/config.json', 'r') as myfile2: # Odczytanie ustawień nawadniania
         data = json.load(myfile2)
         config = [
          data['Threshold'], 
@@ -57,17 +53,8 @@ def home():
         SoilH5 = SoilSensors[4],
         SoilH6 = SoilSensors[5])
 
-@app.route("/charts")	# Wykres średniej pomiarów od czasu (dzisiejsze pomiary tylko atm)
+@app.route("/charts")	# Endpoint wykresów0 pomiarów od czasu - ładowanie z pliku csv do aplikacji 
 def charts():
-    # with open('./dataCapture/pomiary.csv', 'r') as csvfile:
-    #     data = list(csv.reader(csvfile, delimiter=','))
-    #     now = datetime.now()
-    #     dt_string = now.strftime("%d/%m/%Y")
-    #     for dt_string in data:
-    #         todayData = data
-    #     print(todayData)
-
-
     rows = []
     with open("./dataCapture/pomiary.csv", 'r') as file:
         csvreader = csv.reader(file)
@@ -98,31 +85,16 @@ def charts():
         Soil5 = Soil5,
         Soil6 = Soil6,
         SoilAvg = SoilAvg) #Średnia
-    
-@app.route("/about")	# kilka słów o projekcie 
-def about():
-    return render_template("about.html")
 
-@app.route("/settings")	    # Ustawienia (narazie do usunięcia )
-def settings():
-    return render_template("settings.html")
-
-# @app.route('/dataCapture')
-# def runDataCapture():
-#     if sys.platform.startswith('win'):
-#         os.system("start cmd /k python dataCapture/serialMonitor.py")
-#     if sys.platform.startswith('linux'):
-#         os.system("lxterminal -e 'python dataCapture/serialMonitor.py")
-#     return render_template("dataCapture.html")
-
-# @app.route("/waterGarden")	
-# def waterGarden():
-#     sendSignal()
-#     return jsonify(message='success')
+@app.route("/removehistory") # Endpoint czyszczący plik pomiary.csv 	   
+def removehistory():
+    f = open("dataCapture/pomiary.csv", "w")
+    f.truncate()
+    f.close()
+    return '', 204
 
 if __name__ == "__main__":
     app.run(debug=True)
-
 
 # Ustaw serwer lokalny widzialny w zakresie sieci WiFi
 # if __name__ == '__main__':

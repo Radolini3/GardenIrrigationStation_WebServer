@@ -25,7 +25,6 @@ def save_to_csv(tab):
     file.close()
 #===================================================================================================================================
 #Zapisz do JSONa  - wartości z ostatniego pobrania wartości z czujników 
-
 def JSONconfig(config):
     config = {
     "Threshold": config[1],
@@ -52,7 +51,7 @@ def JSONsensors(arr):
         outfile.write(json_obj)
 
 #===================================================================================================================================
-#Sprawdź platformę na której skrypt działa, potem sprawdź dostępne porty i zwróć użytkownikowi
+#Sprawdź platformę (system) na której skrypt działa, potem sprawdź dostępne porty i zwróć użytkownikowi
 def serial_ports():
     print("Checking for avaiable serial ports on your computer")
 
@@ -60,7 +59,7 @@ def serial_ports():
         ports = ['COM%s' % (i + 1) for i in range(256)]
 
     elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
-        ports = glob.glob('/dev/tty[A-Za-z]*')        # this excludes your current terminal "/dev/tty"
+        ports = glob.glob('/dev/tty[A-Za-z]*')
 
     elif sys.platform.startswith('darwin'):
         ports = glob.glob('/dev/tty.*')
@@ -96,8 +95,8 @@ def detectPort():
 print("Detected OS: " + sys.platform)
 port = detectPort()
 serialPort = serial.Serial(port,baudrate=38400,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=None) #timeout=None każe czekać nonstop na przychodzące dane, jeśli damy jakąś stałą, to po nie otrzymaniu danych w zadanym czasie zwróci błąd potem.
-print("Running - Do not close this terminal in order to mantain capturing data")
-#Nieskończona pętla monitorująca port szeregowy w poszukiwaniu przychodzących danych
+print("Running data capture!")
+#Nieskończona pętla monitorująca port szeregowy w poszukiwaniu przychodzących danych i wuwyołująca funkcje zapisu danych
 while True:
         while serialPort.in_waiting:
             strUART = serialPort.readline()
@@ -113,19 +112,3 @@ while True:
             print(sensors)
             JSONsensors(sensors)
             save_to_csv(sensors)
-
-
-
-#===================================================================================================================================
-    # listSize = len(serialPortList)
-    # print("Select port which is connected to microcontroller by entering number: ")
-    # #Kontrola poprawności wyboru portu
-    # while 1:
-    #     try:
-    #         answer = int(input())
-    #         if answer - 1 < listSize and answer > 0:
-    #             break
-    #     except ValueError:
-    #         print("Enter only digit / Value entered is out of range")
-    #         continue
-#===================================================================================================================================
